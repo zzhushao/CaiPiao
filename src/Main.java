@@ -8,7 +8,7 @@ public class Main {
 	private static StringBuffer mBuffer = new StringBuffer();
 
 	public static void main(String[] arg) {
-		Heima.test();
+//		Heima.test();
 		
 //		printFormatNumber(3);
 		

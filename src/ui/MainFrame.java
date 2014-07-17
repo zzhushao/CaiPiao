@@ -8,12 +8,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame; 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import data.DataModel;
+import data.MethodUtils;
 
 public class MainFrame {
 
@@ -23,26 +25,34 @@ public class MainFrame {
 	private ScrollEditText mSourceTextField;
 	private ScrollEditText mResultTextField;
 	private JButton mMakeJButton = null;
+	private JButton mMakeAllNumberJButton = null;
 
 	private JTextField mDeleteGeJTextField = null;
 	private JTextField mDeleteShiJTextField = null;
 	private JTextField mDeleteBaiJTextField = null;
+
+	private JCheckBox mDeleteRepeatNumberBox = null;
+	private JCheckBox mDeleteAdd3EqualNumberBox = null;
+	private JCheckBox mDeleteHistoryNumberBox = null;
+	private JCheckBox mDeleteGroup1NumberBox = null;
+	private JCheckBox mDeleteGroup2NumberBox = null;
 
 	public MainFrame(){
 		initFrame();
 		initTextField();
 		initMakeJButton();
 		initDeleteLabel();
+		initCheckBox();
 	}
 
 	private void initFrame(){
 		mJFrame = new JFrame(AppStrings.Frame_Title);
-		mJFrame.addWindowListener(new WindowAdapter() {  
-            public void windowClosing(WindowEvent e) {  
+		mJFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
                 System.exit(0);  
             }  
  
-            public void windowActivated(WindowEvent e) { 
+            public void windowActivated(WindowEvent e) {
             
             }  
         }); 
@@ -73,6 +83,16 @@ public class MainFrame {
 				makeData();
 			}
 		});
+
+		mMakeAllNumberJButton = new JButton(AppStrings.BUTTON_MAKE_ALL_NUMBER);
+		mMakeAllNumberJButton.setBounds(AppFrameSize.BUTTON_MAKE_ALL_NUMBER_Rectangle);
+		mContainer.add(mMakeAllNumberJButton);
+		mMakeAllNumberJButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				makeAllNumber();
+			}
+		});
 	}
 
 	private void initDeleteLabel(){
@@ -95,9 +115,33 @@ public class MainFrame {
 		mDeleteGeJTextField = getJTextField(AppFrameSize.EDIT_DELETE_GE_Rectangle);
 		mDeleteShiJTextField = getJTextField(AppFrameSize.EDIT_DELETE_SHI_Rectangle);
 		mDeleteBaiJTextField = getJTextField(AppFrameSize.EDIT_DELETE_BAI_Rectangle);
+
 		mContainer.add(mDeleteGeJTextField);
 		mContainer.add(mDeleteShiJTextField);
 		mContainer.add(mDeleteBaiJTextField);
+	}
+
+	private void initCheckBox(){
+		mDeleteRepeatNumberBox = getJCheckBox(AppFrameSize.DELETE_REPEAT_NUMBER_Rectangle, AppStrings.LABEL_DELETE_REPEAT_NUMBER);
+		mContainer.add(mDeleteRepeatNumberBox);
+		
+		mDeleteAdd3EqualNumberBox = getJCheckBox(AppFrameSize.DELETE_THREEADDEQUALS_NUMBER_Rectangle, AppStrings.LABEL_DELETE_THREEADDEQUALS);
+		mContainer.add(mDeleteAdd3EqualNumberBox);
+		
+		mDeleteHistoryNumberBox = getJCheckBox(AppFrameSize.DELETE_HISTORY_NUMBER_Rectangle, AppStrings.LABEL_DELETE_HISTORY_NUMBER);
+		mContainer.add(mDeleteHistoryNumberBox);
+		
+		mDeleteGroup1NumberBox = getJCheckBox(AppFrameSize.DELETE_GROUP1_NUMBER_Rectangle, AppStrings.LABEL_DELETE_GROUP1_NUMBER);
+		mContainer.add(mDeleteGroup1NumberBox);
+
+		mDeleteGroup2NumberBox = getJCheckBox(AppFrameSize.DELETE_GROUP2_NUMBER_Rectangle, AppStrings.LABEL_DELETE_GROUP2_NUMBER);
+		mContainer.add(mDeleteGroup2NumberBox);
+	}
+	
+	private JCheckBox getJCheckBox(Rectangle r, String label){
+		JCheckBox checkBox= new JCheckBox(label);
+		checkBox.setBounds(r);
+		return checkBox;
 	}
 
 	private JTextField getJTextField(Rectangle r){
@@ -110,20 +154,31 @@ public class MainFrame {
 		mJFrame.setVisible(true);
     }
 
+	private void makeAllNumber(){
+		String allStr = MethodUtils.getAllNumber(3);
+		mSourceTextField.setText(allStr);
+	}
+
 	private void makeData(){
-		System.out.println();
 		String resData = mSourceTextField.getText();
 		String geStr = mDeleteGeJTextField.getText();
 		String shiStr = mDeleteShiJTextField.getText();
 		String baiStr = mDeleteBaiJTextField.getText();
 		String qianStr = null;
 		String wanStr = null;
-		System.out.println(resData);
-		System.out.println(geStr);
-		System.out.println(shiStr);
-		System.out.println(baiStr);
 	
+		boolean isDeleteRepeatCount = mDeleteRepeatNumberBox.isSelected();
+		boolean mDeleteAdd3EqualNumber = mDeleteAdd3EqualNumberBox.isSelected();
+		boolean isDeleteHistory = mDeleteHistoryNumberBox.isSelected();
+		boolean deleteGroup1 = mDeleteGroup1NumberBox.isSelected();
+		boolean deleteGroup2 = mDeleteGroup2NumberBox.isSelected();
+
 		DataModel dataModel = new DataModel();
+		dataModel.setDeleteRepeatNumber(isDeleteRepeatCount);
+		dataModel.setDeleteAdd3EqualsNumber(mDeleteAdd3EqualNumber);
+		dataModel.setDeleteHistoryNumber(isDeleteHistory);
+		dataModel.setDeleteGroup1Number(deleteGroup1);
+		dataModel.setDeleteGroup2Number(deleteGroup2);
 		dataModel.setResoureData(resData);
 		dataModel.setDeleteData(geStr, shiStr, baiStr, qianStr, wanStr);
 

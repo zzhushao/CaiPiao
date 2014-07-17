@@ -6,6 +6,9 @@ public class MethodUtils {
 	public static final int TYPE_HOU2 = 2;
 
 	public static boolean isHistoryNumber(String number, String[] deleteHistories){
+		if(deleteHistories == null || deleteHistories.length == 0){
+			return false;
+		}
 		for(String hStr : deleteHistories){
 			if(hStr != null && hStr.endsWith(number)){
 				return true;
@@ -186,5 +189,29 @@ public class MethodUtils {
 			return (iS + iG);
 		}
 		return -1;
+	}
+
+	public static String getAllNumber(int lengh){
+		StringBuffer buffer = new StringBuffer();
+		int maxNumber = (int)Math.pow(10, lengh);
+		String space = " ";
+		for (int i = 0; i < maxNumber; i++) {
+			addFormatNumber(buffer, i, lengh);
+			if(i < maxNumber -1){
+				buffer.append(space);
+			}
+		}
+		return buffer.toString();
+	}
+
+	private static void addFormatNumber(StringBuffer buffer, int num, int lengh) {
+		String numStr = String.valueOf(num);
+		int l = lengh - numStr.length();
+		for (int i = 0; i < lengh; i++) {
+			if (i < l) {
+				buffer.append("0");
+			}
+		}
+		buffer.append(numStr);
 	}
 }
