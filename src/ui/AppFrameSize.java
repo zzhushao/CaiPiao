@@ -28,8 +28,15 @@ public class AppFrameSize {
 	public static final Rectangle DELETE_THREEADDEQUALS_NUMBER_Rectangle = new Rectangle(550, 345, 200, 30);
 
 	public static final Rectangle DELETE_HISTORY_NUMBER_Rectangle = new Rectangle(380, 385, 110, 30);
+	public static final Rectangle DELETE_RANDOM_NUMBER_Rectangle = new Rectangle(550, 385, 160, 30);
 	
 	public static final Rectangle DELETE_GROUP1_NUMBER_Rectangle = new Rectangle(380, 420, 160, 30);
 	public static final Rectangle DELETE_GROUP2_NUMBER_Rectangle = new Rectangle(550, 420, 160, 30);
+
+	public static final Rectangle DELETE_HOU2_LAST_NUMBER_Rectangle = new Rectangle(380, 460, 160, 30);
+	public static final Rectangle DELETE_QIAN2_LAST_NUMBER_Rectangle = new Rectangle(550, 460, 160, 30);
+
+	public static final Rectangle DELETE_EQUAL_BAI_NUMBER_Rectangle = new Rectangle(380, 500, 160, 30);
+	public static final Rectangle DELETE_EQUAL_GE_NUMBER_Rectangle = new Rectangle(550, 500, 160, 30);
 }
  

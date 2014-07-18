@@ -37,6 +37,12 @@ public class MainFrame {
 	private JCheckBox mDeleteGroup1NumberBox = null;
 	private JCheckBox mDeleteGroup2NumberBox = null;
 
+	private JCheckBox mDeleteHou2LastNumberBox = null;
+	private JCheckBox mDeleteQian2LastNumberBox = null;
+	private JCheckBox mDeleteEqualsBaiLastNumberBox = null;
+	private JCheckBox mDeleteEqualsGeLastNumberBox = null;
+	private JCheckBox mDeleteRandomNumberBox = null;
+
 	public MainFrame(){
 		initFrame();
 		initTextField();
@@ -136,6 +142,21 @@ public class MainFrame {
 
 		mDeleteGroup2NumberBox = getJCheckBox(AppFrameSize.DELETE_GROUP2_NUMBER_Rectangle, AppStrings.LABEL_DELETE_GROUP2_NUMBER);
 		mContainer.add(mDeleteGroup2NumberBox);
+		
+		mDeleteHou2LastNumberBox = getJCheckBox(AppFrameSize.DELETE_HOU2_LAST_NUMBER_Rectangle, AppStrings.LABLE_DELETE_HOU2_EQUAL_LAST_NUMBER);
+		mContainer.add(mDeleteHou2LastNumberBox);
+		
+		mDeleteQian2LastNumberBox = getJCheckBox(AppFrameSize.DELETE_QIAN2_LAST_NUMBER_Rectangle, AppStrings.LABLE_DELETE_QIAN2_EQUAL_LAST_NUMBER);
+		mContainer.add(mDeleteQian2LastNumberBox);
+
+		mDeleteEqualsBaiLastNumberBox = getJCheckBox(AppFrameSize.DELETE_EQUAL_BAI_NUMBER_Rectangle, AppStrings.LABLE_DELETE_BAI_EQUAL_NUMBER);
+		mContainer.add(mDeleteEqualsBaiLastNumberBox);
+		
+		mDeleteEqualsGeLastNumberBox = getJCheckBox(AppFrameSize.DELETE_EQUAL_GE_NUMBER_Rectangle, AppStrings.LABLE_DELETE_GE_EQUAL_NUMBER);
+		mContainer.add(mDeleteEqualsGeLastNumberBox);
+		
+		mDeleteRandomNumberBox = getJCheckBox(AppFrameSize.DELETE_RANDOM_NUMBER_Rectangle, AppStrings.LABEL_DELETE_RADOM_NUMBER);
+		mContainer.add(mDeleteRandomNumberBox);
 	}
 	
 	private JCheckBox getJCheckBox(Rectangle r, String label){
@@ -172,6 +193,11 @@ public class MainFrame {
 		boolean isDeleteHistory = mDeleteHistoryNumberBox.isSelected();
 		boolean deleteGroup1 = mDeleteGroup1NumberBox.isSelected();
 		boolean deleteGroup2 = mDeleteGroup2NumberBox.isSelected();
+		boolean deleteHou2 = mDeleteHou2LastNumberBox.isSelected();
+		boolean deleteQian2 = mDeleteQian2LastNumberBox.isSelected();
+		boolean deleteEqualBai = mDeleteEqualsBaiLastNumberBox.isSelected();
+		boolean deleteEqualGe = mDeleteEqualsGeLastNumberBox.isSelected();
+		boolean deleteRandom = mDeleteRandomNumberBox.isSelected();
 
 		DataModel dataModel = new DataModel();
 		dataModel.setDeleteRepeatNumber(isDeleteRepeatCount);
@@ -179,6 +205,11 @@ public class MainFrame {
 		dataModel.setDeleteHistoryNumber(isDeleteHistory);
 		dataModel.setDeleteGroup1Number(deleteGroup1);
 		dataModel.setDeleteGroup2Number(deleteGroup2);
+		dataModel.setDeleteAddHou2EqualsNumber(deleteHou2);
+		dataModel.setDeleteAddQian2EqualsNumber(deleteQian2);
+		dataModel.setDeleteAddEqualsForBaiNumber(deleteEqualBai);
+		dataModel.setDeleteAddEqualsForGeNumber(deleteEqualGe);
+		dataModel.setDeleteRandomANumber(deleteRandom);
 		dataModel.setResoureData(resData);
 		dataModel.setDeleteData(geStr, shiStr, baiStr, qianStr, wanStr);
 

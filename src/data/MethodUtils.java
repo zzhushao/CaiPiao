@@ -1,5 +1,12 @@
 package data;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MethodUtils {
 
 	public static final int TYPE_QIAN2 = 1;
@@ -133,8 +140,9 @@ public class MethodUtils {
 			{"", "", "", shiStr, baiStr},
 			
 			{"", "", baiStr, geStr, shiStr},
-			{"", "", shiStr, geStr, shiStr},
+			{"", "", shiStr, geStr, baiStr},
 			{"", "", geStr, shiStr, baiStr},
+			{"", "", geStr, baiStr, shiStr},
 
 			{"", "", qianStr, baiStr, shiStr},
 			{"", "", baiStr, qianStr, shiStr},
@@ -147,7 +155,7 @@ public class MethodUtils {
 		return groups;
 	}
 
-	private static boolean isAddEqualsForBaiNumber(String number){
+	public static boolean isAddEqualsForBaiNumber(String number){
 		int total = getAddTotalForType(number, TYPE_HOU2);
 		String baiStr = number.substring(number.length() - 3, number.length() - 2);
 		int iB = Integer.parseInt(baiStr);
@@ -157,7 +165,7 @@ public class MethodUtils {
 		return false;
 	}
 
-	private static boolean isAddEqualsForGeNumber(String number){
+	public static boolean isAddEqualsForGeNumber(String number){
 		int total = getAddTotalForType(number, TYPE_QIAN2);
 		String geStr = number.substring(number.length() - 1, number.length());
 		int iG = Integer.parseInt(geStr);
@@ -213,5 +221,47 @@ public class MethodUtils {
 			}
 		}
 		buffer.append(numStr);
+	}
+
+	public static String[][] getRandomDeleteANumber(String lastNumber){
+		int index = (int)(Math.random() * 3);
+		String[][] deleteNumbers = { {""},
+			 {""},
+			 {""},
+			 {""},
+			 {""}
+			 };
+		String s = lastNumber.substring(lastNumber.length() - 1 - index, lastNumber.length() - index);
+		String[] a = { s };
+		deleteNumbers[deleteNumbers.length - 1 - index] = a;
+		return deleteNumbers;
+	}
+
+	public static String[] readHistoryNumber(){
+		String path = System.getProperty("user.dir") + "/res/history_numbers.txt";
+		File file = new File(path);
+		List<String> list = new ArrayList<String>();
+        BufferedReader reader = null;
+        try {
+            System.out.println("以行为单位读取文件内容，一次读一整行：");
+            reader = new BufferedReader(new FileReader(file));
+            String tempString = null;
+            int line = 1;
+            while ((tempString = reader.readLine()) != null) {
+                line++;
+                list.add(tempString);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return (String[])list.toArray();
 	}
 }

@@ -13,6 +13,11 @@ public class AppStrings {
 	public static String LABEL_DELETE_REPEAT_NUMBER = "删除重复数字";
 	public static String LABEL_DELETE_THREEADDEQUALS = "删除与上期后3和值相等项";
 	public static String LABEL_DELETE_HISTORY_NUMBER = "删除历史数据";
+	public static String LABEL_DELETE_RADOM_NUMBER = "删除随机与上期相同的某位";
 	public static String LABEL_DELETE_GROUP1_NUMBER = "删除上一期组列数据";
 	public static String LABEL_DELETE_GROUP2_NUMBER = "删除上二期组列数据";
+	public static String LABLE_DELETE_HOU2_EQUAL_LAST_NUMBER = "删除后2位和值与上期一致";
+	public static String LABLE_DELETE_QIAN2_EQUAL_LAST_NUMBER = "删除前2位和值与上期一致";
+	public static String LABLE_DELETE_BAI_EQUAL_NUMBER = "删除后2位和值与百位一致";
+	public static String LABLE_DELETE_GE_EQUAL_NUMBER = "删除前2位和值与个位一致";
 }
