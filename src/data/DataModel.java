@@ -24,6 +24,7 @@ public class DataModel {
 	private boolean isAddEqualsForBaiNumber = false;
 	private boolean isAddEqualsForGeNumber = false;
 	private boolean isDeleteRandomANumber = false;
+	private boolean isDeleteJiOuGroupNumber = false;
 
 	private String resSplit_Douhao = ",";
 	private String resSplit_Space = " ";
@@ -74,6 +75,10 @@ public class DataModel {
 		isDeleteRandomANumber = isDelete;
 	};
 
+	public void setDeleteJiOuGroupNumber(boolean isDelete){
+		isDeleteJiOuGroupNumber = isDelete;
+	}
+
 	public void setResoureData(String resData){
 		if(resData.contains(resSplit_Douhao)){
 			mResDataArray = resData.split(resSplit_Douhao);
@@ -107,7 +112,7 @@ public class DataModel {
 		String[] deleteHistories = null;
 		if(isDeleteHistoryNumber || isDeleteAdd3EqualsNumber || isDeleteGroup1Number ||
 				isDeleteGroup2Number || isDeleteAddQian2EqualsNumber || isDeleteAddHou2EqualsNumber ||
-				isDeleteRandomANumber){
+				isDeleteRandomANumber || isDeleteJiOuGroupNumber){
 			deleteHistories = MethodUtils.readHistoryNumber();//Numbers.mDeleteHistories;
 		}
 		String[][] group1 = null;
@@ -117,8 +122,8 @@ public class DataModel {
 		String lastNumber2 = null;
 		if(deleteHistories != null && deleteHistories.length > 1){
 			lastNumber = deleteHistories[deleteHistories.length - 1];
+			lastTotal = MethodUtils.getAddTotal(lastNumber, mLengh);
 		}
-		lastTotal = MethodUtils.getAddTotal(lastNumber, mLengh);
 		if(deleteHistories != null && deleteHistories.length > 2){
 			lastNumber2 = deleteHistories[deleteHistories.length - 2];
 		}
@@ -132,6 +137,11 @@ public class DataModel {
 		if(isDeleteRandomANumber){
 			randomA = MethodUtils.getRandomDeleteANumber(lastNumber);
 		}
+		int[] lastIntArr = null;
+		if(isDeleteJiOuGroupNumber){
+			lastIntArr = MethodUtils.getJiOUArray(lastNumber, true);
+		}
+
 		for(String number : mResDataArray){
 			if(MethodUtils.isDeleteNumber(number, 3, mDeleteNumbers) ||
 					(isDeleteRepeatNumber && MethodUtils.hasRepeatCount(number)) ||
@@ -143,7 +153,8 @@ public class DataModel {
 					(isDeleteAddHou2EqualsNumber && MethodUtils.isTwoNumberAddEqualsLast(number, lastNumber, MethodUtils.TYPE_HOU2)) ||
 					(isAddEqualsForBaiNumber && MethodUtils.isAddEqualsForBaiNumber(number)) ||
 					(isAddEqualsForGeNumber && MethodUtils.isAddEqualsForGeNumber(number)) ||
-					(isDeleteRandomANumber && MethodUtils.isDeleteNumber(number, 3, randomA))
+					(isDeleteRandomANumber && MethodUtils.isDeleteNumber(number, 3, randomA)) ||
+					(isDeleteJiOuGroupNumber && MethodUtils.isEqualsIntArray(lastIntArr, MethodUtils.getJiOUArray(number, false)))
 					){
 				
 			}else{

@@ -38,5 +38,7 @@ public class AppFrameSize {
 
 	public static final Rectangle DELETE_EQUAL_BAI_NUMBER_Rectangle = new Rectangle(380, 500, 160, 30);
 	public static final Rectangle DELETE_EQUAL_GE_NUMBER_Rectangle = new Rectangle(550, 500, 160, 30);
+
+	public static final Rectangle DELETE_JIOUGROUP_NUMBER_Rectangle = new Rectangle(380, 540, 160, 30);
 }
  

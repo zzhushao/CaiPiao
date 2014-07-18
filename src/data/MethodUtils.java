@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,11 @@ public class MethodUtils {
 
 	public static final int TYPE_QIAN2 = 1;
 	public static final int TYPE_HOU2 = 2;
+
+	public static final int TYPE_JI = 1;
+	public static final int TYPE_OU = 2;
+
+	private static final int[] mTmpIntArr = new int[3];
 
 	public static boolean isHistoryNumber(String number, String[] deleteHistories){
 		if(deleteHistories == null || deleteHistories.length == 0){
@@ -238,12 +245,18 @@ public class MethodUtils {
 	}
 
 	public static String[] readHistoryNumber(){
-		String path = System.getProperty("user.dir") + "/res/history_numbers.txt";
+		String dir = System.getProperty("user.dir");
+		try {
+			dir = URLDecoder.decode(dir,"UTF-8");
+		} catch (UnsupportedEncodingException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		String path = dir + "/res/history_numbers.txt";
 		File file = new File(path);
 		List<String> list = new ArrayList<String>();
         BufferedReader reader = null;
         try {
-            System.out.println("以行为单位读取文件内容，一次读一整行：");
             reader = new BufferedReader(new FileReader(file));
             String tempString = null;
             int line = 1;
@@ -260,8 +273,37 @@ public class MethodUtils {
                     reader.close();
                 } catch (IOException e1) {
                 }
-            }
-        }
-        return (String[])list.toArray();
+            }       }
+        String[] arr = new String[list.size()];
+        list.toArray(arr);
+        return arr;
+	}
+
+	public static int[] getJiOUArray(String number, boolean newArray){
+		int[] arr = null;
+		if(newArray){
+			arr = new int[3];
+		}else{
+			arr = mTmpIntArr;
+		}
+		for(int i = 0; i < 3; i++){
+			int index = number.length() - i;
+			int v = Integer.valueOf(number.substring(index - 1, index));
+			if(v % 2 == 0){
+				arr[i] = TYPE_OU;
+			}else{
+				arr[i] = TYPE_JI;
+			}
+		}
+		return arr;
+	}
+
+	public static boolean isEqualsIntArray(int[] arrA, int[] arrB){
+		for(int i = 0; i < arrA.length; i++){
+			if(arrA[i] != arrB[i]){
+				return false;
+			}
+		}
+		return true;
 	}
 }

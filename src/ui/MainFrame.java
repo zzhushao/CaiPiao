@@ -42,6 +42,7 @@ public class MainFrame {
 	private JCheckBox mDeleteEqualsBaiLastNumberBox = null;
 	private JCheckBox mDeleteEqualsGeLastNumberBox = null;
 	private JCheckBox mDeleteRandomNumberBox = null;
+	private JCheckBox mDeleteJIouBox = null;
 
 	public MainFrame(){
 		initFrame();
@@ -157,6 +158,9 @@ public class MainFrame {
 		
 		mDeleteRandomNumberBox = getJCheckBox(AppFrameSize.DELETE_RANDOM_NUMBER_Rectangle, AppStrings.LABEL_DELETE_RADOM_NUMBER);
 		mContainer.add(mDeleteRandomNumberBox);
+		
+		mDeleteJIouBox = getJCheckBox(AppFrameSize.DELETE_JIOUGROUP_NUMBER_Rectangle, AppStrings.LABLE_DELETE_JIOUGROUPL_NUMBER);
+		mContainer.add(mDeleteJIouBox);
 	}
 	
 	private JCheckBox getJCheckBox(Rectangle r, String label){
@@ -198,6 +202,7 @@ public class MainFrame {
 		boolean deleteEqualBai = mDeleteEqualsBaiLastNumberBox.isSelected();
 		boolean deleteEqualGe = mDeleteEqualsGeLastNumberBox.isSelected();
 		boolean deleteRandom = mDeleteRandomNumberBox.isSelected();
+		boolean deleteJIOU = mDeleteJIouBox.isSelected();
 
 		DataModel dataModel = new DataModel();
 		dataModel.setDeleteRepeatNumber(isDeleteRepeatCount);
@@ -210,6 +215,8 @@ public class MainFrame {
 		dataModel.setDeleteAddEqualsForBaiNumber(deleteEqualBai);
 		dataModel.setDeleteAddEqualsForGeNumber(deleteEqualGe);
 		dataModel.setDeleteRandomANumber(deleteRandom);
+		dataModel.setDeleteJiOuGroupNumber(deleteJIOU);
+
 		dataModel.setResoureData(resData);
 		dataModel.setDeleteData(geStr, shiStr, baiStr, qianStr, wanStr);
 

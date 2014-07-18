@@ -20,4 +20,5 @@ public class AppStrings {
 	public static String LABLE_DELETE_QIAN2_EQUAL_LAST_NUMBER = "删除前2位和值与上期一致";
 	public static String LABLE_DELETE_BAI_EQUAL_NUMBER = "删除后2位和值与百位一致";
 	public static String LABLE_DELETE_GE_EQUAL_NUMBER = "删除前2位和值与个位一致";
+	public static String LABLE_DELETE_JIOUGROUPL_NUMBER = "删除上期一致奇偶组合";
 }
